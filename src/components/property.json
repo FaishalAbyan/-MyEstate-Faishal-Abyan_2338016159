@@ -1,0 +1,68 @@
+[
+  {
+    "images": "/images/prop1.webp",
+    "address": "Hyarta Residence, Yogyakarta",
+    "name": "Villa with Amazing View",
+    "price": "Rp. 2.500.000.000",
+    "about": "Beautiful, updated, ground level Co-op apartment in the desirable Bay Terrace neighborhood",
+    "bed": 4,
+    "bath": 3,
+    "area": "250 sq ft",
+    "owner": "Joko Anwar"
+  },
+  {
+    "images": "../assets/images/prop2.webp",
+    "address": "Ambarukmo Green Hills, Yogyakarta",
+    "name": "Townhouse for Sale",
+    "price": "Rp. 1.500.000.000",
+    "about": "Beautiful, updated, ground level Co-op apartment in the desirable Bay Terrace neighborhood",
+    "bed": 4,
+    "bath": 3,
+    "area": "450 sq ft",
+    "owner": "Drew Alice"
+  },
+  {
+    "images": "../assets/images/prop3.webp",
+    "address": "Tjokro Boulevard, Yogyakarta",
+    "name": "Duplex house facing for rent",
+    "price": "Rp. 1.000.000.000",
+    "about": "Beautiful, updated, ground level Co-op apartment in the desirable Bay Terrace neighborhood",
+    "bed": 4,
+    "bath": 3,
+    "area": "129 sq ft",
+    "owner": "Bambang Susanto"
+  },
+  {
+    "images": "../assets/images/prop4.webp",
+    "address": "Pakuwon Indah, Surabaya",
+    "name": "House with Side View",
+    "price": "Rp. 2.000.000.000",
+    "about": "Beautiful, updated, ground level Co-op apartment in the desirable Bay Terrace neighborhood",
+    "bed": 4,
+    "bath": 3,
+    "area": "453 sq ft",
+    "owner": "Neon Alice"
+  },
+  {
+    "images": "../assets/images/prop5.webp",
+    "address": "Dago Pakar, Bandung",
+    "name": "Awesome villa for sell",
+    "price": "Rp. 5.000.000.000",
+    "about": "Beautiful, updated, ground level Co-op apartment in the desirable Bay Terrace neighborhood",
+    "bed": 4,
+    "bath": 3,
+    "area": "320 sq ft",
+    "owner": "Fitri Ali"
+  },
+  {
+    "images": "../assets/images/prop6.webp",
+    "address": "BSD City, Tangerang",
+    "name": "Street house for sale",
+    "price": "Rp. 3.000.000.000",
+    "about": "Beautiful, updated, ground level Co-op apartment in the desirable Bay Terrace neighborhood",
+    "bed": 4,
+    "bath": 3,
+    "area": "340 sq ft",
+    "owner": "Suparman Mulyo"
+  }
+]
