@@ -14,7 +14,7 @@ const About = () => {
     });
   }, []);
 
-  const { darkMode } = useDarkMode();
+  const { darkMode,toggleDarkMode } = useDarkMode();
 
   return (
     <div>
@@ -47,16 +47,17 @@ const About = () => {
             data-aos-delay="200"
             className="text-black text-[40px] font-semibold leading-10 dark:text-white"
           >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            My Estate
           </h1>
           <p
             data-aos="zoom-in"
             data-aos-delay="400"
             className="text-xl text-gray-600 dark:text-white text-justify"
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam,
-            voluptatibus? Velit blanditiis mollitia at animi dicta. Recusandae
-            eaque harum quam, ullam voluptates dolore officia in.
+            A leading real estate company specializing in the purchase of homes,
+            apartments, and various types of properties. We offer a wide range
+            of options to suit different preferences and budgets, ensuring that
+            every client finds their ideal living space.
           </p>
           <button className="bg-red-600 dark:bg-red-700 hover:bg-black dark:hover:bg-white dark:hover:text-black text-lg p-4 w-fit text-white font-semibold rounded-xl cursor-pointer transform hover:scale-110 transition-transform duration-300">
             READ MORE

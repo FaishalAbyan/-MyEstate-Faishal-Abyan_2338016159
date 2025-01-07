@@ -1,0 +1,42 @@
+[
+  {
+    "image": "../assets/images/client1.png",
+    "name": "Dana Gilmore",
+    "text": "Excellent team!",
+    "feedback": "The WP Estate team did an outstanding job helping me buy my first home. The high level of service and dedication",
+    "rating": 5
+  },
+  {
+    "image": "../assets/images/client2.png",
+    "name": "Ana Anderson",
+    "text": "Very good work",
+    "feedback": "The WP Estate team did an outstanding job helping me buy my first home. The high level of service and dedication",
+    "rating": 5
+  },
+  {
+    "image": "../assets/images/client3.png",
+    "name": "Garox",
+    "text": "Very well",
+    "feedback": "The WP Estate team did an outstanding job helping me buy my first home. The high level of service and dedication",
+    "rating": 5
+  },
+  {
+    "image": "../assets/images/client4.png",
+    "name": "Senin Bin Kamis",
+    "text": "Excellent team!",
+    "feedback": "The WP Estate team did an outstanding job helping me buy my first home. The high level of service and dedication",
+    "rating": 5
+  },
+  {
+    "image": "../assets/images/client5.png",
+    "name": "Alex Gilmore",
+    "text": "Excellent team!",
+    "feedback": "The WP Estate team did an outstanding job helping me buy my first home. The high level of service and dedication"
+  },
+  {
+    "image": "../assets/images/client6.png",
+    "name": "Sivay Ashbi",
+    "text": "Excellent team!",
+    "feedback": "The WP Estate team did an outstanding job helping me buy my first home. The high level of service and dedication"
+  }
+]

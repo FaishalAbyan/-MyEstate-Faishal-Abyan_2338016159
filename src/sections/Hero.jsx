@@ -34,9 +34,10 @@ const Hero = () => {
             data-aos="zoom-in"
             className="text-white text-xl lg:pr-[500px] pr-0"
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos eum
-            iusto facilis ex sunt corrupti nesciunt obcaecati perspiciatis nulla
-            corporis.
+            Find your perfect home in Indonesia with us. Whether it's a modern
+            city apartment or a tranquil countryside villa, we have something
+            for you. Discover our curated selection and start your journey to a
+            new, comfortable, and delightful home today. Your dream home awaits!
           </p>
         </section>
       </div>
