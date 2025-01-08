@@ -3,6 +3,15 @@ import { useDarkMode } from "../components/DarkModeContext";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { FaStar } from "react-icons/fa";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
+import { db } from "../firebase"; // Import konfigurasi Firestore
 
 const Clients = () => {
   const [clients, setClients] = useState([]);
@@ -12,9 +21,9 @@ const Clients = () => {
     feedback: "",
     image: "",
     rating: 5,
-    isNew: true, // Properti tambahan untuk menandai testimoni baru
+    isNew: true,
   });
-  const [editingIndex, setEditingIndex] = useState(null);
+  const [editingId, setEditingId] = useState(null); // Gunakan ID dari Firestore
   const { darkMode } = useDarkMode();
 
   useEffect(() => {
@@ -25,52 +34,67 @@ const Clients = () => {
       delay: 100,
     });
 
-    fetch("/data/clients.json")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Gagal mengambil data");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setClients(data.map((client) => ({ ...client, isNew: false }))); //  sema data awal sebagai bukan data baru
-      })
-      .catch((error) => console.error("Error fetching clients:", error));
+    fetchClients();
   }, []);
 
-  const handleSubmit = (e) => {
+  // Fetch data dari Firestore
+  const fetchClients = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "clients"));
+      const clientsData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setClients(clientsData);
+    } catch (error) {
+      console.error("Error fetching clients:", error);
+    }
+  };
+
+  // Submit form (add or update)
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (editingIndex !== null) {
-      // Edit mode
-      const updatedClients = [...clients];
-      updatedClients[editingIndex] = newClient;
-      setClients(updatedClients);
-      setEditingIndex(null);
-    } else {
-      // Add new testimonial
-      const updatedClients = [...clients, newClient];
-      setClients(updatedClients);
+    try {
+      if (editingId) {
+        // Update mode
+        const clientDoc = doc(db, "clients", editingId);
+        await updateDoc(clientDoc, newClient);
+      } else {
+        // Add new testimonial
+        await addDoc(collection(db, "clients"), newClient);
+      }
+
+      setNewClient({
+        name: "",
+        text: "",
+        feedback: "",
+        image: "",
+        rating: 5,
+        isNew: true,
+      });
+      setEditingId(null);
+      fetchClients(); // Refresh data
+    } catch (error) {
+      console.error("Error saving client:", error);
     }
-
-    setNewClient({
-      name: "",
-      text: "",
-      feedback: "",
-      image: "",
-      rating: 5,
-      isNew: true, // Pastikan testimoni baru ditandai
-    });
   };
 
-  const handleDelete = (index) => {
-    const updatedClients = clients.filter((_, i) => i !== index);
-    setClients(updatedClients);
+  // Delete testimonial
+  const handleDelete = async (id) => {
+    try {
+      const clientDoc = doc(db, "clients", id);
+      await deleteDoc(clientDoc);
+      fetchClients(); // Refresh data
+    } catch (error) {
+      console.error("Error deleting client:", error);
+    }
   };
 
-  const handleEdit = (index) => {
-    setNewClient(clients[index]);
-    setEditingIndex(index);
+  // Edit testimonial
+  const handleEdit = (client) => {
+    setNewClient(client);
+    setEditingId(client.id);
   };
 
   return (
@@ -93,11 +117,11 @@ const Clients = () => {
           id="client-box"
           className="grid lg:grid-cols-3 grid-cols-1 justify-center items-center gap-8 w-full"
         >
-          {clients.map((item, index) => (
+          {clients.map((item) => (
             <div
               data-aos="zoom-in"
               data-aos-delay="200"
-              key={index}
+              key={item.id}
               className="bg-white dark:bg-gray-900 hover:bg-red-100 cursor-pointer p-12 flex flex-col justify-center items-center gap-6 rounded-xl w-full"
             >
               <div className="flex justify-start items-center w-full gap-4">
@@ -125,23 +149,20 @@ const Clients = () => {
                     <FaStar key={i} className="size-4 text-yellow-400" />
                   ))}
               </div>
-              {/* Tombol Edit dan Delete hanya untuk testimoni baru */}
-              {item.isNew && (
-                <div className="flex justify-end gap-4 mt-4 w-full">
-                  <button
-                    onClick={() => handleEdit(index)}
-                    className="bg-yellow-500 text-white px-4 py-2 rounded"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(index)}
-                    className="bg-red-500 text-white px-4 py-2 rounded"
-                  >
-                    Delete
-                  </button>
-                </div>
-              )}
+              <div className="flex justify-end gap-4 mt-4 w-full">
+                <button
+                  onClick={() => handleEdit(item)}
+                  className="bg-yellow-500 text-white px-4 py-2 rounded"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(item.id)}
+                  className="bg-red-500 text-white px-4 py-2 rounded"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -149,9 +170,7 @@ const Clients = () => {
         {/* Formulir pengiriman testimoni */}
         <form onSubmit={handleSubmit} className="w-full mt-10">
           <h2 className="text-2xl font-semibold text-black dark:text-white mb-4">
-            {editingIndex !== null
-              ? "Edit Testimonial"
-              : "Submit Your Testimonial"}
+            {editingId ? "Edit Testimonial" : "Submit Your Testimonial"}
           </h2>
           <input
             type="text"
@@ -194,7 +213,7 @@ const Clients = () => {
           <select
             value={newClient.rating}
             onChange={(e) =>
-              setNewClient({ ...newClient, rating: e.target.value })
+              setNewClient({ ...newClient, rating: parseInt(e.target.value) })
             }
             className="w-full p-2 mb-4 border rounded"
           >
@@ -208,7 +227,7 @@ const Clients = () => {
             type="submit"
             className="bg-blue-500 text-white px-4 py-2 rounded"
           >
-            {editingIndex !== null ? "Update" : "Submit"}
+            {editingId ? "Update" : "Submit"}
           </button>
         </form>
       </section>
