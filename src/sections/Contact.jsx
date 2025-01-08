@@ -38,7 +38,12 @@ const Contact = () => {
     e.preventDefault();
 
     // Validate form fields
-    if (!formData.name || !formData.email || !formData.phone || !formData.message) {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.message
+    ) {
       setMessage("Please fill in all fields.");
       return;
     }
@@ -64,8 +69,21 @@ const Contact = () => {
       );
   };
 
+  // Function to handle form reset (delete)
+  const handleReset = () => {
+    setFormData({ name: "", email: "", phone: "", message: "" });
+    setMessage("Form data reset.");
+  };
+
+  // Function to handle form edit
+  const handleEdit = () => {
+    setMessage("You can edit the form fields now.");
+  };
+
   return (
-    <div className={`${darkMode ? "dark:bg-black" : "light:bg-transparent"} pb-20`}>
+    <div
+      className={`${darkMode ? "dark:bg-black" : "light:bg-transparent"} pb-20`}
+    >
       <section
         id="contact"
         className={`${
@@ -113,14 +131,32 @@ const Contact = () => {
               onChange={handleChange}
               className="w-full px-6 py-3 border-2 border-gray-200 rounded-xl"
             ></textarea>
-            <button
-              type="submit"
-              className="bg-red-600 w-full text-md px-8 py-3 text-white font-semibold rounded-xl hover:bg-black dark:hover:bg-red-700 cursor-pointer"
-            >
-              SEND EMAIL
-            </button>
+            <div className="flex justify-between gap-4">
+              <button
+                type="submit"
+                className="bg-red-600 w-full text-md px-8 py-3 text-white font-semibold rounded-xl hover:bg-black dark:hover:bg-red-700 cursor-pointer"
+              >
+                SEND EMAIL
+              </button>
+              <button
+                type="button"
+                onClick={handleReset}
+                className="bg-gray-600 w-full text-md px-8 py-3 text-white font-semibold rounded-xl hover:bg-black dark:hover:bg-gray-700 cursor-pointer"
+              >
+                DELETE
+              </button>
+              <button
+                type="button"
+                onClick={handleEdit}
+                className="bg-blue-600 w-full text-md px-8 py-3 text-white font-semibold rounded-xl hover:bg-black dark:hover:bg-blue-700 cursor-pointer"
+              >
+                EDIT
+              </button>
+            </div>
           </form>
-          {message && <p className="text-center mt-4 text-xl text-green-500">{message}</p>}
+          {message && (
+            <p className="text-center mt-4 text-xl text-green-500">{message}</p>
+          )}
         </div>
         <div className="flex flex-col justify-center items-start gap-8 lg:p-20 p-6 w-full">
           <h1
@@ -142,7 +178,11 @@ const Contact = () => {
             data-aos-delay="600"
             className="text-xl text-gray-600 text-justify dark:text-white"
           >
-            At My Estate, we offer a wide range of properties to suit your needs. Whether you're looking for a cozy apartment in the city or a spacious house in the suburbs, we have something for everyone. Our team is dedicated to helping you find the perfect home. Contact us today and start your journey to finding your dream property.
+            At My Estate, we offer a wide range of properties to suit your
+            needs. Whether you're looking for a cozy apartment in the city or a
+            spacious house in the suburbs, we have something for everyone. Our
+            team is dedicated to helping you find the perfect home. Contact us
+            today and start your journey to finding your dream property.
           </p>
           <button className="bg-red-600 text-md px-8 py-3 text-white font-semibold rounded-xl hover:bg-black dark:hover:bg-red-700 cursor-pointer">
             SEND EMAIL

@@ -33,7 +33,7 @@ const Clients = () => {
         return response.json();
       })
       .then((data) => {
-        setClients(data.map((client) => ({ ...client, isNew: false }))); // menandai semua data awal sebagai bukan data baru
+        setClients(data.map((client) => ({ ...client, isNew: false }))); //  sema data awal sebagai bukan data baru
       })
       .catch((error) => console.error("Error fetching clients:", error));
   }, []);

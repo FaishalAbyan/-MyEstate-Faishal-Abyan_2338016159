@@ -64,5 +64,16 @@
     "bath": 3,
     "area": "340 sq ft",
     "owner": "Suparman Mulyo"
+  },
+  {
+    "images": "../assets/images/prop7.webp",
+    "address": "Pakuwon Indah, Surabaya",
+    "name": "House with Side View",
+    "price": "Rp. 4.000.000.000",
+    "about": "Beautiful, updated, in the desirable Bay Terrace neighborhood",
+    "bed": 4,
+    "bath": 3,
+    "area": "453 sq ft",
+    "owner": "Neon Alice"
   }
 ]
